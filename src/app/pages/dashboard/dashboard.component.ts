@@ -3,7 +3,7 @@ import Chart from 'chart.js';
 
 
 @Component({
-    selector: 'dashboard-cmp',
+    selector: 'dashboard',
     moduleId: module.id,
     templateUrl: 'dashboard.component.html'
 })
