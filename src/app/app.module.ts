@@ -12,7 +12,19 @@ import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { ReadDataService } from './services/read-data.service';
+import { HttpClientModule } from "@angular/common/http";
 
+// import { FusionChartsModule } from "angular-fusioncharts";
+
+// // Import FusionCharts library and chart modules
+// import * as FusionCharts from "fusioncharts";
+// import * as charts from "fusioncharts/charts";
+// import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+
+
+// Pass the fusioncharts library and chart modules
+// FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
 
 @NgModule({
   declarations: [
@@ -28,9 +40,13 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     NavbarModule,
     ToastrModule.forRoot(),
     FooterModule,
-    FixedPluginModule
+    FixedPluginModule,
+    HttpClientModule, 
+    // FusionChartsModule
   ],
-  providers: [],
+  providers: [
+    ReadDataService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,54 @@
+[
+    {
+        "Salesman": "AD",
+        "Sales": 2104
+    },
+    {
+        "Salesman": "ARVIND",
+        "Sales": 1869
+    },
+    {
+        "Salesman": "Admin",
+        "Sales": 109
+    },
+    {
+        "Salesman": "BABLU",
+        "Sales": 1532
+    },
+    {
+        "Salesman": "HEMANT",
+        "Sales": 1334
+    },
+    {
+        "Salesman": "NARAYAN",
+        "Sales": 1706
+    },
+    {
+        "Salesman": "NARESH",
+        "Sales": 1324
+    },
+    {
+        "Salesman": "PRADEEP",
+        "Sales": 1334
+    },
+    {
+        "Salesman": "RAMESH",
+        "Sales": 1342
+    },
+    {
+        "Salesman": "ROHIT",
+        "Sales": 1661
+    },
+    {
+        "Salesman": "UMESH",
+        "Sales": 1468
+    },
+    {
+        "Salesman": "VINOD",
+        "Sales": 2132
+    },
+    {
+        "Salesman": "VIRU",
+        "Sales": 1311
+    }
+]
