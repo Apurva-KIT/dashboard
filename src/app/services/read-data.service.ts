@@ -17,7 +17,7 @@ export class ReadDataService {
 
   constructor(private http: HttpClient) {}
 
-  getJSON(): Observable<Salesman[]> {
+  getSalesmen(): Observable<Salesman[]> {
       return this.http.get<Salesman[]>("./assets/data.json");
   }
 
