@@ -108,7 +108,7 @@
   <div class="col-md-12">
     <div class="card ">
       <div class="card-header ">
-        <h5 class="card-title">No. of Items Sold by Salesman</h5>
+        <h5 class="card-title">No. of Items Per Salesman</h5>
         <p class="card-category">Salesmen's Performance</p>
       </div>
       <div class="card-body ">
@@ -127,14 +127,36 @@
   <div class="col-md-4">
     <div class="card ">
       <div class="card-header ">
-        <h5 class="card-title">Email Statistics</h5>
-        <p class="card-category">Last Campaign Performance</p>
+        <h5 class="card-title">Top 5 Sales</h5>
+        <!-- <p class="card-category">Last Campaign Performance</p> -->
       </div>
-      <div class="card-body ">
-        <canvas id="top5saleman"></canvas>
+      <div class="card-body " >
+        <!-- <canvas id="top5saleman"></canvas> -->
+        <table class="table table-hover" *ngIf="dataLoaded==true" id="top5saleman" >
+          <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Sales</th>
+                </tr>
+          </thead> 
+          <tbody>
+            <tr *ngFor="let s of salesmen">
+              <td>{{s.Salesman}}</td>
+              <td>{{s.Sales}}</td>
+              <!-- <td>
+                <a class="btn btn-sm btn-primary" href="/eventform/{{e.Id}}"> Edit </a>
+                <button type="button" class="btn btn-sm btn-danger" (click)="delete(e)">Delete</button>
+                <a class="btn btn-sm btn-success" (click)="createLink(e)"> Generate Link </a>
+                <a class="btn  btn-sm btn-info" href="/viewresult/{{e.Id}}/{{e.Name}}">Result</a>
+                <a class="btn  btn-sm btn-primary" href="/topbanks/{{e.Id}}">Analysis</a>
+                
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div class="card-footer ">
-        <div class="legend">
+        <!-- <div class="legend">
           <i class="fa fa-circle text-primary"></i> Opened
           <i class="fa fa-circle text-warning"></i> Read
           <i class="fa fa-circle text-danger"></i> Deleted
@@ -143,7 +165,7 @@
         <hr>
         <div class="stats">
           <i class="fa fa-calendar"></i> Number of emails sent
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -159,7 +181,6 @@
       <div class="card-footer">
         <div class="chart-legend">
           <i class="fa fa-circle text-info"></i> Items Sold
-          <i class="fa fa-circle text-red"></i> Top 5 Sales
         </div>
         <hr/>
         <div class="card-stats">

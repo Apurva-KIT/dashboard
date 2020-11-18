@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Salesman } from 'app/models/salesman.model';
 import { ReadDataService } from 'app/services/read-data.service';
-import Chart from 'chart.js';
+import {Chart} from 'chart.js'
 
 
 @Component({
@@ -12,21 +12,24 @@ import Chart from 'chart.js';
 
 export class DashboardComponent implements OnInit{
 
+  dataLoaded: boolean;
+
   salesmen: Salesman[]=[];
   canvas : any;
   ctx: any;
   chartColor: string;
   chartEmail: any;
   SalesmenEffort: any;
-  labels : String[] = [];
+  labels : string[] = [];
   dataset : any[] = [];
 
   constructor(private readDataService : ReadDataService) { }
 
   ngOnInit(){
 
-    this.getSalemanData();
+    this.topFiveSalesman();;
     this.renderChartData();
+
   
   }
 
@@ -34,6 +37,7 @@ export class DashboardComponent implements OnInit{
     this.readDataService.getSalesmen().subscribe(data => {
       
       this.salesmen = data; 
+      
 
     });
   }
@@ -45,48 +49,48 @@ export class DashboardComponent implements OnInit{
     
       
 
-      var speedCanvas = document.getElementById("speedChart");
+      // var speedCanvas = document.getElementById("speedChart");
 
-      var dataFirst = {
-        data: [0, 19, 15, 20, 30, 40, 40, 50, 25, 30, 50, 70],
-        fill: false,
-        borderColor: '#fbc658',
-        backgroundColor: 'transparent',
-        pointBorderColor: '#fbc658',
-        pointRadius: 4,
-        pointHoverRadius: 4,
-        pointBorderWidth: 8,
-      };
+      // var dataFirst = {
+      //   data: [0, 19, 15, 20, 30, 40, 40, 50, 25, 30, 50, 70],
+      //   fill: false,
+      //   borderColor: '#fbc658',
+      //   backgroundColor: 'transparent',
+      //   pointBorderColor: '#fbc658',
+      //   pointRadius: 4,
+      //   pointHoverRadius: 4,
+      //   pointBorderWidth: 8,
+      // };
 
-      var dataSecond = {
-        data: [0, 5, 10, 12, 20, 27, 30, 34, 42, 45, 55, 63],
-        fill: false,
-        borderColor: '#51CACF',
-        backgroundColor: 'transparent',
-        pointBorderColor: '#51CACF',
-        pointRadius: 4,
-        pointHoverRadius: 4,
-        pointBorderWidth: 8
-      };
+      // var dataSecond = {
+      //   data: [0, 5, 10, 12, 20, 27, 30, 34, 42, 45, 55, 63],
+      //   fill: false,
+      //   borderColor: '#51CACF',
+      //   backgroundColor: 'transparent',
+      //   pointBorderColor: '#51CACF',
+      //   pointRadius: 4,
+      //   pointHoverRadius: 4,
+      //   pointBorderWidth: 8
+      // };
 
-      var speedData = {
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [dataFirst, dataSecond]
-      };
+      // var speedData = {
+      //   labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      //   datasets: [dataFirst, dataSecond]
+      // };
 
-      var chartOptions = {
-        legend: {
-          display: false,
-          position: 'top'
-        }
-      };
+      // var chartOptions = {
+      //   legend: {
+      //     display: false,
+      //     position: 'top'
+      //   }
+      // };
 
-      var lineChart = new Chart(speedCanvas, {
-        type: 'line',
-        hover: false,
-        data: speedData,
-        options: chartOptions
-      });
+      // var lineChart = new Chart(speedCanvas, {
+      //   type: 'line',
+      //   hover: false,
+      //   data: speedData,
+      //   options: chartOptions
+      // });
   }
 
   salesCountPerSalesman() : void{
@@ -95,7 +99,7 @@ export class DashboardComponent implements OnInit{
       this.labels = res.map(res => res.Salesman);
       this.dataset = res.map(res => res.Sales);
 
-      const top5 = this.topFiveSalesman(res);
+      // const top5 = this.topFiveSalesman(res);       // code for highlighting top 5 sales
 
       this.canvas = document.getElementById("SalesmenEffort");
       this.ctx = this.canvas.getContext("2d");
@@ -106,16 +110,17 @@ export class DashboardComponent implements OnInit{
           labels: this.labels,
           datasets: [{
               // borderColor: "#51adcf",
-              backgroundColor: this.dataset.map(function(data,i) {
+              backgroundColor: "#51adcf",
+              // this.dataset.map(function(data,i) {  // code for highlighting top 5 sales
                 
-                for (var sm of top5) {
-                  if(data == sm){
-                    return "#b83b5e";
-                    }
-                }
+              //   for (var sm of top5) {
+              //     if(data == sm){
+              //       return "#b83b5e";
+              //       }
+              //   }
                 
-                return "#51adcf";
-              }),
+              //   return "#51adcf";
+              // }),
 
               // pointRadius: 0,
               // pointHoverRadius: 0,
@@ -180,80 +185,94 @@ export class DashboardComponent implements OnInit{
 
   }
 
-  topFiveSalesman(res : any) : any {
+  topFiveSalesman(/*res : any*/) : void/*any*/ {  //code for highlighting
 
-    // this.readDataService.renderSalesPerSalesmenChartData().subscribe(res =>{
-      const top5 = res.map(res => res.Sales).sort().reverse().slice(0, 5);
-       return top5;
-    //   this.labels = top5.map(top5 => top5.Salesman);
-    //   
-    //   this.canvas = document.getElementById("top5saleman");
-    //   this.ctx = this.canvas.getContext("2d");
-    //   this.chartEmail = new Chart(this.ctx, {
-    //     type: 'pie',
-    //     data: {
-    //       labels: this.labels,
-    //       datasets: [{
-    //         label: "Emails",
-    //         pointRadius: 0,
-    //         pointHoverRadius: 0,
-    //         backgroundColor: [
-    //           '#e3e3e3',
-    //           '#4acccd',
-    //           '#fcc468',
-    //           '#ef8157'
-    //         ],
-    //         borderWidth: 0,
-    //         data: this.dataset
-    //       }]
-    //     },
+    // const top5 = res.map(res => res.Sales).sort().reverse().slice(0, 5);
+    // return top5;
 
-    //     options: {
+    this.readDataService.getSalesmen().subscribe(res =>{
 
-    //       legend: {
-    //         display: false
-    //       },
+      this.salesmen=res.sort((a, b) => (a.Sales < b.Sales) ? 1 : -1).slice(0,5);
+      this.dataLoaded=true; 
+      // $(function(){
+      //   //alert('test');  
+      //   $('#top5saleman').DataTable( {
+      //     dom: 'Bfrtip',
+      //     buttons: [
+      //         'copy', 'csv', 'excel', 'pdf', 'print'
+      //     ]
+      //     } );
+      // })
+ 
+      // this.labels = top5.map(top5 => top5.Salesman);
+      
+      // this.canvas = document.getElementById("top5saleman");
+      // this.ctx = this.canvas.getContext("2d");
+      // this.chartEmail = new Chart(this.ctx, {
+      //   type: 'pie',
+      //   data: {
+      //     labels: this.labels,
+      //     datasets: [{
+      //       label: "Emails",
+      //       pointRadius: 0,
+      //       pointHoverRadius: 0,
+      //       backgroundColor: [
+      //         '#e3e3e3',
+      //         '#4acccd',
+      //         '#fcc468',
+      //         '#ef8157'
+      //       ],
+      //       borderWidth: 0,
+      //       data: this.dataset
+      //     }]
+      //   },
 
-    //       pieceLabel: {
-    //         render: 'percentage',
-    //         fontColor: ['white'],
-    //         precision: 2
-    //       },
+      //   options: {
 
-    //       tooltips: {
-    //         enabled: false
-    //       },
+      //     legend: {
+      //       display: false
+      //     },
 
-    //       scales: {
-    //         yAxes: [{
+      //     pieceLabel: {
+      //       render: 'percentage',
+      //       fontColor: ['white'],
+      //       precision: 2
+      //     },
 
-    //           ticks: {
-    //             display: false
-    //           },
-    //           gridLines: {
-    //             drawBorder: false,
-    //             zeroLineColor: "transparent",
-    //             color: 'rgba(255,255,255,0.05)'
-    //           }
+      //     tooltips: {
+      //       enabled: false
+      //     },
 
-    //         }],
+      //     scales: {
+      //       yAxes: [{
 
-    //         xAxes: [{
-    //           barPercentage: 1.6,
-    //           gridLines: {
-    //             drawBorder: false,
-    //             color: 'rgba(255,255,255,0.1)',
-    //             zeroLineColor: "transparent"
-    //           },
-    //           ticks: {
-    //             display: false,
-    //           }
-    //         }]
-    //       },
-    //     }
-    //   });
+      //         ticks: {
+      //           display: false
+      //         },
+      //         gridLines: {
+      //           drawBorder: false,
+      //           zeroLineColor: "transparent",
+      //           color: 'rgba(255,255,255,0.05)'
+      //         }
 
-    // });
+      //       }],
+
+      //       xAxes: [{
+      //         barPercentage: 1.6,
+      //         gridLines: {
+      //           drawBorder: false,
+      //           color: 'rgba(255,255,255,0.1)',
+      //           zeroLineColor: "transparent"
+      //         },
+      //         ticks: {
+      //           display: false,
+      //         }
+      //       }]
+      //     },
+      //   }
+      // });
+
+    });
     
   }
 
