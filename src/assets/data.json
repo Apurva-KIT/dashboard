@@ -48,7 +48,11 @@
         "Sales": 2132
     },
     {
-        "Salesman": "VIRU",
-        "Sales": 1311
+        "Salesman": "test",
+        "Sales": 2032
+    },
+    {
+        "Salesman": "test",
+        "Sales": 1322
     }
 ]
