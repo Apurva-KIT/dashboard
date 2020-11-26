@@ -7,7 +7,8 @@ import {Chart} from 'chart.js'
 @Component({
     selector: 'dashboard',
     moduleId: module.id,
-    templateUrl: 'dashboard.component.html'
+    templateUrl: 'dashboard.component.html',
+    styleUrls: ['./chart-scroll.css']
 })
 
 export class DashboardComponent implements OnInit{
@@ -93,6 +94,7 @@ export class DashboardComponent implements OnInit{
       // });
   }
 
+
   salesCountPerSalesman() : void{
 
     this.readDataService.renderSalesPerSalesmenChartData().subscribe(res=>{
@@ -111,6 +113,7 @@ export class DashboardComponent implements OnInit{
           datasets: [{
               // borderColor: "#51adcf",
               backgroundColor: "#51adcf",
+              minBarLength: 5,
               // this.dataset.map(function(data,i) {  // code for highlighting top 5 sales
                 
               //   for (var sm of top5) {
@@ -130,6 +133,8 @@ export class DashboardComponent implements OnInit{
           ]
         },
         options: {
+         responsive: true,
+         maintainAspectRatio: false,
           legend: {
             display: false,
           },
@@ -146,7 +151,7 @@ export class DashboardComponent implements OnInit{
 
           scales: {
             yAxes: [{
-
+              stacked: true,
               ticks: {
                 // fontColor: "#9f9f9f",
                 // beginAtZero: false,
@@ -156,13 +161,13 @@ export class DashboardComponent implements OnInit{
               gridLines: {
                 drawBorder: false,
                 zeroLineColor: "#ccc",
-                color: 'rgba(255,255,255,0.05)'
+                color: 'rgba(255,255,255,0.05)',
               }
 
             }],
 
             xAxes: [{
-              // barPercentage: 1.6,
+              
               gridLines: {
                 drawBorder: false,
                 color: 'rgba(255,255,255,0.1)',
@@ -175,10 +180,23 @@ export class DashboardComponent implements OnInit{
               }
             }]
           },
+          // animation: {
+          //   onComplete: function() {
+          //     var sourceCanvas = this.chart.ctx.canvas;
+          //     var copyWidth = this.chart.controller.chartArea.left - 5;
+          //     // the +5 is so that the bottommost y axis label is not clipped off
+          //     // we could factor this in using measureText if we wanted to be generic
+          //     var copyHeight = this.chart.controller.chartArea.bottom + 5; // 282 //this.scale.endPoint + 5;
+      
+          //     var targetCanvas = document.getElementById("myChartAxis");
+          //     var targetCtx = this.canvas.getContext("2d");
+          //     targetCtx.canvas.width = copyWidth;
+          //     targetCtx.drawImage(sourceCanvas, 0, 0, copyWidth, copyHeight, 0, 0, copyWidth, copyHeight);
+      
+          //   },
+          // }
         }
       });
-
-
     });
     
 

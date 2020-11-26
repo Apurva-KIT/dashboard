@@ -5,6 +5,11 @@
     "baseUrl": "",
     "types": []
   },
+  "paths": {
+
+    // "@scroll/css" : ["src/assets/css/chart-scroll.css"]
+
+  },
   "exclude": [
     "test.ts",
     "**/*.spec.ts"

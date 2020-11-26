@@ -1,0 +1,18 @@
+.chartWrapper {
+  position: relative;
+
+}
+
+.chartCanvaWrapper{
+  height: 300px;
+  width : 1000px;
+  
+}
+
+.chartAreaWrapper {
+  width: 100%;
+  overflow-x: scroll;
+}
+
+
+
